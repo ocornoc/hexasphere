@@ -48,7 +48,7 @@ impl BaseShape for IcoSphereBase {
     }
 
     #[inline]
-    fn interpolate_multiple(&self, a: Vec3A, b: Vec3A, indices: &[u32], points: &mut [Vec3A])  {
+    fn interpolate_multiple(&self, a: Vec3A, b: Vec3A, indices: &[usize], points: &mut [Vec3A])  {
         interpolation::geometric_slerp_multiple(a, b, indices, points);
     }
 }
@@ -126,7 +126,7 @@ impl BaseShape for TetraSphereBase {
     }
 
     #[inline]
-    fn interpolate_multiple(&self, a: Vec3A, b: Vec3A, indices: &[u32], points: &mut [Vec3A]) {
+    fn interpolate_multiple(&self, a: Vec3A, b: Vec3A, indices: &[usize], points: &mut [Vec3A]) {
         interpolation::geometric_slerp_multiple(a, b, indices, points);
     }
 }
@@ -186,7 +186,7 @@ impl BaseShape for TriangleBase {
     }
 
     #[inline]
-    fn interpolate_multiple(&self, a: Vec3A, b: Vec3A, indices: &[u32], points: &mut [Vec3A]) {
+    fn interpolate_multiple(&self, a: Vec3A, b: Vec3A, indices: &[usize], points: &mut [Vec3A]) {
         interpolation::lerp_multiple(a, b, indices, points);
     }
 }
@@ -245,7 +245,7 @@ impl BaseShape for SquareBase {
     }
 
     #[inline]
-    fn interpolate_multiple(&self, a: Vec3A, b: Vec3A, indices: &[u32], points: &mut [Vec3A]) {
+    fn interpolate_multiple(&self, a: Vec3A, b: Vec3A, indices: &[usize], points: &mut [Vec3A]) {
         interpolation::lerp_multiple(a, b, indices, points);
     }
 }
@@ -293,7 +293,7 @@ impl BaseShape for CubeBase {
     }
 
     #[inline]
-    fn interpolate_multiple(&self, a: Vec3A, b: Vec3A, indices: &[u32], points: &mut [Vec3A]) {
+    fn interpolate_multiple(&self, a: Vec3A, b: Vec3A, indices: &[usize], points: &mut [Vec3A]) {
         interpolation::geometric_slerp_multiple(a, b, indices, points);
     }
 }
@@ -403,9 +403,9 @@ mod consts {
             pub(crate) static ref TRIANGLE_NORMALS: [Vec3A; 4] = {
                 fn normal(triangle: usize) -> Vec3A {
                     (
-                        INITIAL_POINTS[TRIANGLES[triangle].a as usize] +
-                        INITIAL_POINTS[TRIANGLES[triangle].b as usize] +
-                        INITIAL_POINTS[TRIANGLES[triangle].c as usize]
+                        INITIAL_POINTS[TRIANGLES[triangle].a] +
+                        INITIAL_POINTS[TRIANGLES[triangle].b] +
+                        INITIAL_POINTS[TRIANGLES[triangle].c]
                     ) / 3.0
                 }
 
@@ -685,9 +685,9 @@ mod consts {
             pub(crate) static ref TRIANGLE_NORMALS: [Vec3A; 20] = {
                 fn normal(triangle: usize) -> Vec3A {
                     (
-                        INITIAL_POINTS[TRIANGLES[triangle].a as usize] +
-                        INITIAL_POINTS[TRIANGLES[triangle].b as usize] +
-                        INITIAL_POINTS[TRIANGLES[triangle].c as usize]
+                        INITIAL_POINTS[TRIANGLES[triangle].a] +
+                        INITIAL_POINTS[TRIANGLES[triangle].b] +
+                        INITIAL_POINTS[TRIANGLES[triangle].c]
                     ) / 3.0
                 }
 

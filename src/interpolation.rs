@@ -32,14 +32,14 @@ pub fn geometric_slerp_half(a: Vec3A, b: Vec3A) -> Vec3A {
 ///
 /// Note: `a` and `b` should both be normalized for normalized results.
 ///
-pub fn geometric_slerp_multiple(a: Vec3A, b: Vec3A, indices: &[u32], points: &mut [Vec3A]) {
+pub fn geometric_slerp_multiple(a: Vec3A, b: Vec3A, indices: &[usize], points: &mut [Vec3A]) {
     let angle = a.dot(b).acos();
     let sin = angle.sin().recip();
 
-    for (percent, index) in indices.iter().enumerate() {
+    for (percent, &index) in indices.iter().enumerate() {
         let percent = (percent + 1) as f32 / (indices.len() + 1) as f32;
 
-        points[*index as usize] =
+        points[index] =
             a * (((1.0 - percent) * angle).sin() * sin) + b * ((percent * angle).sin() * sin);
     }
 }
@@ -65,11 +65,11 @@ pub fn normalized_lerp_half(a: Vec3A, b: Vec3A) -> Vec3A {
 /// essentially the same algorithm as `BaseShape` would without ever being
 /// reimplemented.
 ///
-pub fn normalized_lerp_multiple(a: Vec3A, b: Vec3A, indices: &[u32], points: &mut [Vec3A]) {
-    for (percent, index) in indices.iter().enumerate() {
+pub fn normalized_lerp_multiple(a: Vec3A, b: Vec3A, indices: &[usize], points: &mut [Vec3A]) {
+    for (percent, &index) in indices.iter().enumerate() {
         let percent = (percent + 1) as f32 / (indices.len() + 1) as f32;
 
-        points[*index as usize] = ((1.0 - percent) * a + percent * b).normalize();
+        points[index] = ((1.0 - percent) * a + percent * b).normalize();
     }
 }
 
@@ -92,10 +92,10 @@ pub fn lerp_half(a: Vec3A, b: Vec3A) -> Vec3A {
 /// essentially the same algorithm as `BaseShape` would without ever being
 /// reimplemented.
 ///
-pub fn lerp_multiple(a: Vec3A, b: Vec3A, indices: &[u32], points: &mut [Vec3A]) {
-    for (percent, index) in indices.iter().enumerate() {
+pub fn lerp_multiple(a: Vec3A, b: Vec3A, indices: &[usize], points: &mut [Vec3A]) {
+    for (percent, &index) in indices.iter().enumerate() {
         let percent = (percent + 1) as f32 / (indices.len() + 1) as f32;
 
-        points[*index as usize] = (1.0 - percent) * a + percent * b;
+        points[index] = (1.0 - percent) * a + percent * b;
     }
 }
