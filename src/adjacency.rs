@@ -69,6 +69,7 @@ impl AdjacentStore {
 
 #[cfg(feature = "adjacency")]
 mod tests {
+    #[allow(unused_imports)]
     use crate::{AdjacentStore, shapes::IcoSphere};
 
     #[test]
