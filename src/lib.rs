@@ -234,6 +234,7 @@ pub trait EquilateralBaseShape: BaseShape {
     fn triangle_min_dot() -> f32;
 }
 
+#[derive(Debug, Clone)]
 ///
 /// The edge between two main triangles.
 ///
@@ -870,6 +871,7 @@ impl Triangle {
     }
 }
 
+#[derive(Debug, Clone)]
 ///
 /// A progressively subdivided shape which can record
 /// the indices of the points and list out the individual
