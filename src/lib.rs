@@ -1008,6 +1008,13 @@ impl<T, S: BaseShape> Subdivided<T, S> {
     }
 
     ///
+    /// Returns the custom data created by the generator function.
+    ///
+    pub fn raw_data_mut(&mut self) -> &mut [T] {
+        &mut self.data
+    }
+
+    ///
     /// Calculate the number of indices which each main
     /// triangle will add to the vertex buffer.
     ///
